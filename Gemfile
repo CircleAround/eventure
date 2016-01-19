@@ -48,3 +48,13 @@ end
 # Use OmniAuth for Twitter login
 gem 'omniauth'
 gem 'omniauth-twitter'
+
+# Use RSpec for test scripts
+group :development, :test do
+  # Rspec
+  gem 'rspec-rails'
+  # Set up Ruby objects as test data
+  gem 'factory_girl_rails'
+  # Cleaning test database
+  gem 'database_cleaner'
+end
