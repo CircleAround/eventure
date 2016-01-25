@@ -58,3 +58,8 @@ group :development, :test do
   # Cleaning test database
   gem 'database_cleaner'
 end
+
+# Use dotenv for set environmental variables
+group :development, :test do
+  gem 'dotenv-rails'
+end
