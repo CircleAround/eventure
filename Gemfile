@@ -67,3 +67,6 @@ end
 # Use Kaminari for pagination
 gem 'kaminari'
 gem 'kaminari-bootstrap'
+
+# Use Ransack for search events
+gem 'ransack'
