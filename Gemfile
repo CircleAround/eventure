@@ -63,3 +63,7 @@ end
 group :development, :test do
   gem 'dotenv-rails'
 end
+
+# Use Kaminari for pagination
+gem 'kaminari'
+gem 'kaminari-bootstrap'
