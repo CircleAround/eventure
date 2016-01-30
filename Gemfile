@@ -73,3 +73,6 @@ gem 'ransack'
 
 # Use CarrierWave for upload images
 gem 'carrierwave'
+
+# Use MiniMagick for resize images
+gem 'mini_magick'
