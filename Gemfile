@@ -70,3 +70,6 @@ gem 'kaminari-bootstrap'
 
 # Use Ransack for search events
 gem 'ransack'
+
+# Use CarrierWave for upload images
+gem 'carrierwave'
