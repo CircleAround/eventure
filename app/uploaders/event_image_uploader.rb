@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class EventImageUploader < CarrierWave::Uploader::Base
+  include CarrierWave::MiniMagick
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -25,6 +26,7 @@ class EventImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
+  process :resize_to_limit => [1130, 1130]
   # process :scale => [200, 300]
   #
   # def scale(width, height)
