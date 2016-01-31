@@ -76,3 +76,37 @@ gem 'carrierwave'
 
 # Use MiniMagick for resize images
 gem 'mini_magick'
+
+# Use Bullet for N+1 problem
+group :development, :test do
+  gem 'bullet'
+end
+
+# Use rubocop for check coding style
+group :development do
+  gem 'rubocop', require: false
+end
+
+# Use Better Errors for show much better and more useful error page
+group :development do
+  gem 'better_errors'
+end
+
+# Use EnumHelp for work fine with Enum feather, I18n and simple_form
+gem 'enum_help'
+
+# Use Pry for degug Rails project
+group :development, :test do
+  # Pry & extensions
+  gem 'pry-rails'
+  gem 'pry-coolline'
+  gem 'pry-byebug'
+  gem 'rb-readline'
+
+  # Show better SQL in Pry
+  gem 'hirb'
+  gem 'hirb-unicode'
+
+  # Add color in Pry
+  gem 'awesome_print'
+end
