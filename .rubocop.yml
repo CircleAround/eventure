@@ -1,5 +1,4 @@
 AllCops:
-  RunRailsCops: true
   DisplayCopNames: true
   Exclude:
     - db/schema.rb
@@ -12,6 +11,9 @@ AllCops:
     - spec/spec_helper.rb
     - spec/rails_helper.rb
     - bin/*
+
+Rails:
+  Enabled: true
 
 Style/Lambda:
   Enabled: false
