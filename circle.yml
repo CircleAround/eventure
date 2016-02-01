@@ -6,6 +6,6 @@ machine:
 deployment:
   production:
     branch: master
-    command:
+    commands:
       - git push git@heroku.com:eventure0126.git $CIRCLE_SHA1:refs/heads/master
       - heroku run rake db:migrate --app eventure0126
