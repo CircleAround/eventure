@@ -1,0 +1,11 @@
+machine:
+  timezone:
+    Asia/Tokyo
+  ruby:
+    version: 2.3.0
+deployment:
+  production:
+    branch: master
+    commands:
+      - git push git@heroku.com:eventure0126.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app eventure0126
