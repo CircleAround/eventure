@@ -15,4 +15,29 @@ describe Event do
       it { is_expected.to be_truthy }
     end
   end
+
+  describe '#start_time_should_be_before_end_time' do
+    subject { event.send(:start_time_should_be_before_end_time) }
+
+    context '開始時間が終了時間より遅いとき' do
+      let(:start_time) { DateTime.new(2020, 8, 9, 00, 00, 00, 'Tokyo') }
+      let(:end_time) { DateTime.new(2020, 7, 24, 00, 00, 00, 'Tokyo') }
+      let(:event) { build(:event, start_time: start_time, end_time: end_time) }
+      it { expect(event).to be_invalid }
+    end
+
+    context '開始時間と終了時間が同じとき' do
+      let(:start_time) { DateTime.new(2020, 7, 24, 00, 00, 00, 'Tokyo') }
+      let(:end_time) { DateTime.new(2020, 7, 24, 00, 00, 00, 'Tokyo') }
+      let(:event) { build(:event, start_time: start_time, end_time: end_time) }
+      it { expect(event).to be_invalid }
+    end
+
+    context '開始時間が終了時間より早いとき' do
+      let(:start_time) { DateTime.new(2020, 7, 24, 00, 00, 00, 'Tokyo') }
+      let(:end_time) { DateTime.new(2020, 8, 9, 00, 00, 00, 'Tokyo') }
+      let(:event) { build(:event, start_time: start_time, end_time: end_time) }
+      it { expect(event).to be_valid }
+    end
+  end
 end
