@@ -45,8 +45,8 @@ group :development do
   gem 'spring'
 end
 
-# Use OmniAuth for Twitter login
-gem 'omniauth'
+# Use devise for authentication
+gem 'devise'
 gem 'omniauth-twitter'
 
 # Use RSpec for test scripts
