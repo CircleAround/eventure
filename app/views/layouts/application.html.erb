@@ -23,11 +23,12 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to 'イベントを作る', new_event_path %></li>
-          <% if logged_in? %>
-            <li><%= link_to '退会', retire_user_path %></li>
-            <li><%= link_to 'ログアウト', logout_path %></li>
+          <% if user_signed_in? %>
+            <li><%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></li>
+            <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
           <% else %>
-            <li><%= link_to 'Twitterでログイン', '/auth/twitter' %></li>
+            <li><%= link_to 'アカウント作成', new_user_registration_path %></li>
+            <li><%= link_to 'ログイン', new_user_session_path %></li>
           <% end %>
         </ul>
       </div>
