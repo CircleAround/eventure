@@ -48,6 +48,8 @@ end
 # Use devise for authentication
 gem 'devise'
 gem 'omniauth-twitter'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
 
 # Use RSpec for test scripts
 group :development, :test do
