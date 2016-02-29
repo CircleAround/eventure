@@ -50,6 +50,7 @@ gem 'devise'
 gem 'omniauth-twitter'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+gem 'devise-bootstrap-views'
 
 # Use RSpec for test scripts
 group :development, :test do
