@@ -5,6 +5,7 @@ FactoryGirl.define do
     sequence(:nickname) { |i| "nickname#{i}" }
     sequence(:image_url) { |i| "http://example.com/image#{i}.jpg" }
     sequence(:email) { |i| "test#{i}@test.com" }
-    sequence(:password) { |i| "password" }
+    sequence(:password) { |i| "password#{i}" }
+    sequence(:username) { |i| "username#{i}" }
   end
 end
