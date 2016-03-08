@@ -2,18 +2,13 @@ class UsersController < ApplicationController
   before_action :authenticate
 
   def show
-    @user = User.where(id: current_user).first
+    @user = current_user
 
-    @events_owner = Event.where(owner_id: current_user)
-    .where(Event.arel_table[:start_time]
-    .gteq(Time.zone.now))
-    .order(:start_time)
+    @future_events_owner = current_user.created_events.after_now
+    @past_events_owner = current_user.created_events.before_now
 
-    @events_part = Event.where(Event.arel_table[:start_time]
-    .gteq(Time.zone.now))
-    .joins(:tickets)
-    .merge(Ticket.where(user_id: current_user))
-    .order(:start_time)
+    @future_events_part = current_user.participating_events.after_now
+    @past_events_part = current_user.participating_events.before_now
   end
 
   def retire
