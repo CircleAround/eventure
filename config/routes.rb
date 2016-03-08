@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   root to: 'welcome#index'
 
   devise_for :users, :controllers => {
-    :omniauth_callbacks => "omniauth_callbacks"
+    omniauth_callbacks: 'omniauth_callbacks'
   }
-  resources :users, :only => :show
+  resources :users, only: :show
 
   resource :user, only: :destroy do
     get 'retire'
