@@ -24,9 +24,8 @@
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to 'イベントを作る', new_event_path %></li>
           <% if user_signed_in? %>
-            <li><%= link_to current_user.username, user_path %></li>
+            <li><%= link_to 'マイページ', user_path %></li>
             <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-            <li><%= link_to '退会', registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></li>
           <% else %>
             <li><%= link_to 'アカウント作成', new_user_registration_path %></li>
             <li><%= link_to 'ログイン', new_user_session_path %></li>
