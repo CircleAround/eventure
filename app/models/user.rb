@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:twitter],
-         authentication_keys: [:login]
+                        authentication_keys: [:login]
 
   before_destroy :check_all_events_finished
 
@@ -25,8 +25,8 @@ class User < ActiveRecord::Base
   end
 
   validates :username,
-  uniqueness: { case_sensitive: :false },
-  length: { minimum: 4, maximum: 20 }
+            uniqueness: { case_sensitive: :false },
+            length: { minimum: 4, maximum: 20 }
 
   def self.find_or_create_from_auth_hash(auth_hash)
     provider = auth_hash[:provider]
