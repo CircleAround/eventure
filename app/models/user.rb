@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:twitter],
-         :authentication_keys => [:login]
+         authentication_keys: [:login]
 
   before_destroy :check_all_events_finished
 
@@ -17,9 +17,10 @@ class User < ActiveRecord::Base
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      where(conditions).where(["username = :value OR lower(email) = lower(:value)", { :value => login }]).first
+      where(conditions)
+        .find_by(["username = :value OR lower(email) = lower(:value)", { value: login }])
     else
-      where(conditions).first
+      find_by(conditions)
     end
   end
 
