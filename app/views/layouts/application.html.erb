@@ -24,7 +24,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to 'イベントを作る', new_event_path %></li>
           <% if user_signed_in? %>
-            <li><%= link_to 'マイページ', user_path %></li>
+            <li><%= link_to 'マイページ', event_owned_user_path %></li>
             <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
           <% else %>
             <li><%= link_to 'アカウント作成', new_user_registration_path %></li>

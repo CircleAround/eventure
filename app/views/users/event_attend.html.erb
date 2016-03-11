@@ -1,0 +1,26 @@
+<% now = Time.zone.now %>
+<div class="page-header">
+  <h1><%= @user.username %>さんのマイページ</h1>
+  <%= link_to 'プロフィール編集', edit_user_registration_path, class: "btn btn-primary" %>
+</div>
+<ul class="nav nav-tabs nav-justified">
+  <li><a href="event_owned">開催予定のイベント</a></li>
+  <li class="active"><a href="event_attend">参加予定のイベント</a></li>
+  <li><a href="event_owned_past">開催したイベント</a></li>
+  <li><a href="event_attend_past">参加したイベント</a></li>
+</ul>
+<div>
+  <h2>参加予定のイベント一覧</h1>
+</div>
+<div class="list-group">
+  <% @events_attend.each do |event| %>
+    <%= link_to(event, class: 'list-group-item') do %>
+      <h4 class="list-group-item-heading">
+        <%= event.name %>
+      </h4>
+      <p class="list-group-item-text">
+        <%= event.start_time.strftime('%Y/%m/%d %H:%M') %> - <%= event.end_time.strftime('%Y/%m/%d %H:%M') %>
+      </p>
+    <% end %>
+  <% end %>
+</div>
