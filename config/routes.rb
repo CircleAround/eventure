@@ -4,7 +4,15 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     omniauth_callbacks: 'omniauth_callbacks'
   }
-  resource :user, only: :show
+
+  resource :user, only: :show do
+    collection do
+      get 'event_owned' => 'users#event_owned'
+      get 'event_attend' => 'users#event_attend'
+      get 'event_owned_past' => 'users#event_owned_past'
+      get 'event_attend_past' => 'users#event_attend_past'
+    end
+  end
 
   resource :user, only: :destroy do
     get 'retire'
@@ -14,6 +22,7 @@ Rails.application.routes.draw do
     resources :tickets, only: [:new, :create, :destroy]
   end
   match '*path' => 'application#error404', via: :all
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
