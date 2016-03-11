@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate
 
+  PER = 10
+
   def show
     @user = current_user
 
@@ -13,22 +15,22 @@ class UsersController < ApplicationController
 
   def event_owned
     @user = current_user
-    @events_owned = current_user.created_events.after_now
+    @events_owned = current_user.created_events.after_now.page(params[:page]).per(PER)
   end
 
   def event_attend
     @user = current_user
-    @events_attend = current_user.participating_events.after_now
+    @events_attend = current_user.participating_events.after_now.page(params[:page]).per(PER)
   end
 
   def event_owned_past
     @user = current_user
-    @events_owned_past = current_user.created_events.before_now
+    @events_owned_past = current_user.created_events.before_now.page(params[:page]).per(PER)
   end
 
   def event_attend_past
     @user = current_user
-    @events_attend_past = current_user.participating_events.before_now
+    @events_attend_past = current_user.participating_events.before_now.page(params[:page]).per(PER)
   end
 
   def retire
