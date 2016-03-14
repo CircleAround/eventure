@@ -93,11 +93,12 @@
           <% @tickets.each do |ticket| %>
             <%if ticket.user %>
               <li>
-                <%= link_to(url_for_twitter(ticket.user)) do %>
-                  <%= image_tag ticket.user.image_url, width: 20, height: 20 %>
-                  <%= "@#{ticket.user.nickname}" %>
+                <% if ticket.user.provider == 'twitter' %>
+                  <%= link_to "@#{ticket.user.nickname}", url_for_twitter(ticket.user) %>
+                <% else %>
+                  <%= ticket.user.username %>
                 <% end %>
-                <%= ticket.comment %>
+                「<%= ticket.comment %>」
               </li>
             <% else %>
               退会したユーザです
