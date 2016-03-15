@@ -112,3 +112,6 @@ group :development, :test do
   # Add color in Pry
   gem 'awesome_print'
 end
+
+# Use Paranoia for logical delete
+gem 'paranoia'
