@@ -16,9 +16,10 @@
       </div>
       <div class="panel-body">
         <% if @event.owner %>
-          <%= link_to(url_for_twitter(@event.owner)) do %>
-            <%= image_tag @event.owner.image_url %>
-            <%= "@#{@event.owner.nickname}" %>
+          <% if @event.owner.provider == 'twitter' %>
+            <%= link_to "@#{@event.owner.nickname}", url_for_twitter(@event.owner) %>
+          <% else %>
+            <%= @event.owner.username %>
           <% end %>
         <% else %>
           退会したユーザです
