@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+  acts_as_paranoid
+
   mount_uploader :event_image, EventImageUploader
 
   has_many :tickets, dependent: :destroy
