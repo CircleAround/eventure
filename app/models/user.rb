@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
          :omniauthable, omniauth_providers: [:twitter],
          authentication_keys: [:login]
 
+  acts_as_paranoid
+
   before_destroy :check_all_events_finished
 
   has_many :created_events, class_name: 'Event', foreign_key: :owner_id, dependent: :nullify
