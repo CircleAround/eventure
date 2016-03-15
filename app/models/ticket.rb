@@ -1,4 +1,6 @@
 class Ticket < ActiveRecord::Base
+  acts_as_paranoid column: :canceled_at
+
   belongs_to :user
   belongs_to :event
 
