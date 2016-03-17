@@ -14,6 +14,10 @@ class UsersController < ApplicationController
   end
 
   def event_owned
+    @events_history = current_user.participating_events.three_month
+    # @events_history = current_user.tickets.where.not(deleted_at: nil)
+    # @events_history = current_user.participating_events.where.not(deleted_at: nil)
+
     @user = current_user
     @events_owned = current_user.created_events.after_now.page(params[:page]).per(PER)
   end

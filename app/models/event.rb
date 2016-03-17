@@ -13,8 +13,11 @@ class Event < ActiveRecord::Base
   validates :end_time, presence: true
   validate :start_time_should_be_before_end_time
 
-  scope :before_now, -> { where("start_time < ?", Time.zone.now) }
-  scope :after_now, -> { where("start_time >= ?", Time.zone.now) }
+  scope :before_now, -> { where('start_time < ?', Time.zone.now) }
+  scope :after_now, -> { where('start_time >= ?', Time.zone.now) }
+
+  scope :three_month, -> { where(start_time: Date.today - 3.months..Date.today) }
+  scope :one_month, -> { where(start_time: Date.today - 1.month..Date.today) }
 
   def created_by?(user)
     return false unless user
