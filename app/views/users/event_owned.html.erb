@@ -4,19 +4,14 @@
   <%= link_to 'プロフィール編集', edit_user_registration_path, class: "btn btn-primary" %>
 </div>
 <div class="list-group">
-  aaa
-  <% @events_history.each do |event| %>
-    <%= link_to(event, class: 'list-group-item') do %>
-      <h4 class="list-group-item-heading">
-        <%= event.name %>
-      </h4>
-      <p class="list-group-item-text">
-        <%= event.start_time.strftime('%Y/%m/%d %H:%M') %> - <%= event.end_time.strftime('%Y/%m/%d %H:%M') %>
-      </p>
-    <% end %>
-  <% end %>
-  <%= @events_history.count %>
-  aaa
+  <p>positive point</p>
+  <%#= @events_history_pp.count %>
+  <%= current_user.pp %>
+  <p>negative point</p>
+  <%#= @events_history_np.count %>
+  <%= current_user.np %>
+  <p>total point</p>
+  <%= current_user.tp %>
 </div>
 <ul class="nav nav-tabs nav-justified">
   <li class="active"><a href="event_owned">開催予定のイベント</a></li>
