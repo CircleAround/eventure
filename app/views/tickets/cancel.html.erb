@@ -1,0 +1,18 @@
+<div class="page-header">
+  <h1>キャンセルの確認</h1>
+</div>
+<% if current_user.errors.any? %>
+  <div class="alert alert-danger">
+    <ul>
+      <% current_user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<p>イベント開催日の1週間以内にキャンセルした場合、イベントの参加判定に用いられるポイントが減点されます。</p>
+<p>また、キャンセルせずに不参加とした場合にはより大きな減点となりますのでご注意ください。</p>
+<p>以上を確認した上で、キャンセルする場合には以下のキャンセルボタンを押してください。</p>
+<hr>
+<%= link_to '参加をキャンセルする', event_ticket_path, method: :delete, class: 'btn btn-danger' %>
