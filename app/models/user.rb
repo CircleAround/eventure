@@ -61,6 +61,22 @@ class User < ActiveRecord::Base
     end
   end
 
+  def pp
+    pp = participating_events.three_month.count
+    return pp
+  end
+
+  def np
+    canceled_tickets = tickets.only_deleted.joins_get_all_columns(:event).all
+    np = canceled_tickets.count
+    return np
+  end
+
+  def tp
+    tp = pp - np
+    return tp
+  end
+
   private
 
   def check_all_events_finished
