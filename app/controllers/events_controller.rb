@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate, except: :show
+  before_action :check_event_finished, only: [:edit, :update, :destroy]
 
   def show
     @event = Event.find(params[:id])
@@ -46,5 +47,12 @@ class EventsController < ApplicationController
       :name, :place, :event_image, :event_image_cache, :remove_event_image,
       :content, :start_time, :end_time
     )
+  end
+
+  def check_event_finished
+    @event = current_user.created_events.find(params[:id])
+    if @event.start_time < Time.zone.now
+      redirect_to @event, alert: '開催中もしくは終了したイベントです。'
+    end
   end
 end
