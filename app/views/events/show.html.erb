@@ -53,36 +53,53 @@
   </div>
   <div class="col-md-4">
     <% if @event.created_by?(current_user) %>
-      <%= link_to 'イベントを編集する', edit_event_path(@event), class: 'btn btn-info btn-lg btn-block' %>
-      <%= link_to 'イベントを削除する', event_path(@event), class: 'btn btn-danger btn-lg btn-block', method: :delete, data: { confirm: '本当に削除しますか？' } %>
+      <% if @event.start_time > Time.zone.now %>
+        <%= link_to 'イベントを編集する', edit_event_path(@event), class: 'btn btn-info btn-lg btn-block' %>
+        <%= link_to 'イベントを削除する', event_path(@event), class: 'btn btn-danger btn-lg btn-block', method: :delete, data: { confirm: '本当に削除しますか？' } %>
+      <% else %>
+        <button class="btn btn-info btn-lg btn-block" disabled>イベントを編集する</button>
+        <button class="btn btn-danger btn-lg btn-block" disabled>イベントを削除する</button>
+      <% end %>
     <% end %>
     <% if @ticket %>
-      <%= link_to '参加をキャンセルする', cancel_event_ticket_path(@event, @ticket), class: 'btn btn-warning btn-lg btn-block' %>
+      <% if @event.start_time > Time.zone.now %>
+        <%= link_to '参加をキャンセルする', cancel_event_ticket_path(@event, @ticket), class: 'btn btn-warning btn-lg btn-block' %>
+      <% else %>
+        <button class="btn btn-warning btn-lg btn-block" disabled>参加をキャンセルする</button>
+      <% end %>
     <% elsif user_signed_in? %>
-      <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#createTicket">
-        参加する
-      </button>
-      <div class="modal fade" id="createTicket" tabindex="-1" role="dialog" aria-labelledby="dialogHeader" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title" id="dialogHeader">参加コメント</h4>
+      <% if @event.start_time > Time.zone.now %>
+        <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#createTicket">
+          参加する
+        </button>
+        <div class="modal fade" id="createTicket" tabindex="-1" role="dialog" aria-labelledby="dialogHeader" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="dialogHeader">参加コメント</h4>
+              </div>
+              <%= form_for(@event.tickets.build, url: event_tickets_path(@event), remote: true) do |f| %>
+                <div class="modal-body">
+                  <%= f.text_field :comment, class: 'form-control' %>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+                  <%= f.button '送信', class: 'btn btn-primary', data: { disable_with: '送信中…' } %>
+                </div>
+              <% end %>
             </div>
-            <%= form_for(@event.tickets.build, url: event_tickets_path(@event), remote: true) do |f| %>
-              <div class="modal-body">
-                <%= f.text_field :comment, class: 'form-control' %>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-                <%= f.button '送信', class: 'btn btn-primary', data: { disable_with: '送信中…' } %>
-              </div>
-            <% end %>
           </div>
         </div>
-      </div>
+      <% else %>
+        <button class="btn btn-primary btn-lg btn-block" disabled>参加する</button>
+      <% end %>
     <% else %>
-      <%= link_to '参加する', new_event_ticket_path(@event), class: "btn btn-primary btn-lg btn-block" %>
+      <% if @event.start_time > Time.zone.now %>
+        <%= link_to '参加する', new_event_ticket_path(@event), class: "btn btn-primary btn-lg btn-block" %>
+      <% else %>
+        <button class="btn btn-primary btn-lg btn-block" disabled>参加する</button>
+      <% end %>
     <% end %>
     <hr>
     <div class="panel panel-default">
